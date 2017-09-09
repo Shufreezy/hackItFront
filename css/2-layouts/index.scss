@@ -1,0 +1,78 @@
+// DIR of layouts scss
+
+#header{
+
+}
+
+#body{
+
+}
+
+#calendar{
+
+}
+
+#footer{
+
+}
+
+.container {
+  @include outer-container;
+}
+
+.col {
+  @include span-columns(12);
+  background:red;
+}
+
+$grid: (
+  columns: 12,
+  gutter: 2rem,
+);
+
+$tablet-grid: min-width 768px;
+
+.container {
+  @include outer-container;
+}
+
+.header {
+  @include span-columns(12, $grid);
+  @include margin(2rem null);
+  color:rgba(0, 0, 0, 0.54);
+  .logo{
+    @include span-columns(6);
+    font-size: $font-size-1;
+    display:inline-block;
+  }
+  .links{
+    @include span-columns(3);
+    font-size:$font-size-3;
+    display:inline-block;
+    text-align:right;
+    margin-top:30px;
+    a{
+        text-decoration: none;
+        color:rgba(0,0,0,0.54)
+    }
+  }
+}
+
+.sidebar {
+  @include span-columns(1, $grid);
+  margin-bottom: 2rem;
+  background: rgba(0,0,0,0.54);
+  @include media($tablet-grid) {
+    @include span-columns(2);
+ 
+  }
+}
+
+.body {
+  @include span-columns(12, $grid);
+  border: 2px black solid;
+  @include media($tablet-grid) {
+    @include span-columns(12);
+  }
+}
+
