@@ -3,50 +3,39 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Calendar</title>
         <link rel="stylesheet" href="css/0-plugins/fullcalendar.min.css">
         <link rel="stylesheet" href="css/0-plugins/fullcalendar.print.min.css">
         <link rel="stylesheet" href="css/styles.css">
 
     </head>
-    <body>
+    <body ng-app="HackathonApp" ng-controller="HackathonController">
         <div class="container">
         <div class="header">
             <span class="logo">Logo</span>
-            <span class="links"><a href="">Link</a></span>
-            <span class="links"><a href="">Link</a></span>
+            <span class="links"><a href="">Hub</a></span>
+            <span class="links"><a href="" ng-click="profileClick()">Profile</a></span>
         </div>
         <div class="body">
+            <div ui-calendar="uiConfig.calendar" class="event-calendar" ng-model="eventSources"></div>            
             <div class="modal calendar">
-                <div ui-calendar="{{uiConfig.calendar}}" calendar="myCalendar" class="span8 calendar" ng-model="eventSources"></div> 
-                <label for="modal-1">
-                    *Angular Calendar API* 
-                    <div class="modal-trigger">*Sample Calendar Event*</div>
-                </label>
                 <input class="modal-state" id="modal-1" type="checkbox" />
                 <div class="modal-fade-screen">
                     <div class="modal-inner">
                         <div class="modal-close" for="modal-1"></div>
                         <div class="modal-title">
                             <h4>
-                            Event Name
-                            <h4>
-                            <span class="attendies-header">Tags:</span>
-                            <div class="tags">
-                                <h4> Public</h4>
-                                <h4> Public</h4>
-                                <h4> Public</h4>
-                                <h4> Public</h4>
-                                <h4> Public</h4>
-                            </div>
+                                Event Name
+                                <h4>
+                                    <span class="attendies-header">Tags:</span>
+                                    <div class="tags">
+                                        <h4> Public</h4>
+                                        <h4> Public</h4>
+                                        <h4> Public</h4>
+                                        <h4> Public</h4>
+                                        <h4> Public</h4>
+                                    </div>
                         </div>
-                        <!-- <div class="breadcrumb">
-                            <a href="javascript:void(0)">10:00 AM - 11:00 AM</a>
-                            <a href="javascript:void(0)">11:00 AM - 1:00 PM</a>
-                            <a href="javascript:void(0)">11:00 AM - 1:00 PM</a>
-                            <a href="javascript:void(0)">11:00 AM - 1:00 PM</a>
-                            <a href="javascript:void(0)"></a>
-                            </div> -->
                         <div class="side-image">
                             <div class="images-wrapper"><img src="img/poster.jpg"></div>
                             <div class="side-image-content">
@@ -62,43 +51,43 @@
                                     <h3 class="attendies-header"> @gayaniloxavier@csyoutsourcing.com </h3>
                                 </div>
                                 <div class="header-buttons">
-                                    <button id="modal-going-btn">Going</button> 
+                                    <button id="modal-going-btn">Going</button>
                                     <button>Not Going</button>
                                 </div>
                                 <br><br><br>
-                                    <span class="attendies-header desciption"> Description: </span>
-                                    <p> 
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel magni, exercitationem architecto praesentium. Et aliquam, saepe ab ad doloremque repellat. Amet vero, iste fugiat molestiae quibusdam praesentium quos laudantium repellendus.
-                                    </p>
-                                    <h3 class="attendies-header"> Attendees: </h3>
+                                <span class="attendies-header desciption"> Description: </span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel magni, exercitationem architecto praesentium. Et aliquam, saepe ab ad doloremque repellat. Amet vero, iste fugiat molestiae quibusdam praesentium quos laudantium repellendus.
+                                </p>
+                                <h3 class="attendies-header"> Attendees: </h3>
 
                                 <div class="attendies-body">
                                     <ul class="attendies-list">
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
-                                        <li> 
+                                        <li>
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
                                             <span class="name">Xavier Gayanilo</span>
                                         </li>
@@ -109,6 +98,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal calendar" >
+                <input class="modal-state" id="modal-2" type="checkbox" />
+                <div class="modal-fade-screen" id="modal-profile">
+                    <div class="modal-inner">
+                        <div class="modal-close" for="modal-1"></div>
+                            <div class="comment">
+                              <div class="comment-image">
+                                <img src="img/mini-profile2.jpg">
+                              </div>
+                              <div class="comment-content">
+                                <h1>Xavier Gayanilo</h1>
+                                <p>gayaniloxavier@yahoo.com</p>
+                                <p>contant</p>
+                                 <div class="tags">
+                                    <h4> Public</h4>
+                                    <h4> Public</h4>
+                                    <h4> Public</h4>
+                                    <h4> Public</h4>
+                                    <h4> Public</h4>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
@@ -116,6 +133,7 @@
         <script type="text/javascript" src="js/calendar.js"></script>
         <script type="text/javascript" src="js/fullcalendar.min.js"></script>
         <script type="text/javascript" src="js/gcal.min.js"></script>
+        <script type="text/javascript" src="ng/app.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
         <script>
             if ('serviceWorker' in navigator) {
