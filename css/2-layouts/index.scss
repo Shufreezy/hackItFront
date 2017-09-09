@@ -70,7 +70,8 @@ $tablet-grid: min-width 768px;
 
 .body {
   @include span-columns(12, $grid);
-  border: 2px black solid;
+  padding-top:20px;
+  // border: 2px rgba(0,0,0,0.54) solid;
   @include media($tablet-grid) {
     @include span-columns(12);
   }
