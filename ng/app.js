@@ -119,8 +119,49 @@ HackathonApp.controller('HackathonController', ['$scope','$window','RequestServi
    
     $scope.alertEventOnClick = function(e){
         $("#modal-1").click();
-        console.log("triggered");
+        console.log("triggered",e);
+        $scope.event = e;
+
+        RequestService.get('http://localhost:8090/get-event-tags/' + e.id,
+            function (response) {
+                $scope.event.tags = response; // TODO: change to consume server
+            }, function (response) {
+                console.log(response);
+            });
+
+        RequestService.get('http://localhost:8090/get-participant-list/' + e.id,
+            function (response) {
+                $scope.event.participants = response; // TODO: change to consume server
+            }, function (response) {
+                console.log(response);
+            });
+
+        RequestService.get('http://localhost:8090/get-user/' + e.userid,
+            function (response) {
+                $scope.event.organizer = response; // TODO: change to consume server
+            }, function (response) {
+                console.log(response);
+            });
     }
+
+    var onSuccess = function (response) {
+        response.forEach(function (event) {
+            $scope.uiConfig.calendar.events.push({
+                    id: event.id,
+                    title: event.name,
+                    start: event.dateStart,
+                    end: event.dateEnd,
+                    location: event.location
+                });
+        });
+    }
+
+    var onError = function (response) {
+        console.log(response);
+    }
+
+    // Please place {userid} after /get-events
+    RequestService.get('http://localhost:8090/get-events/1', onSuccess, onError);
 
     $scope.login = function(){
            console.log("triggered");
@@ -132,6 +173,7 @@ HackathonApp.controller('HackathonController', ['$scope','$window','RequestServi
         console.log("success");
     }else
         $window.location.href = '/login';
+    }
 
     $scope.uiConfig = {
         calendar: {
@@ -185,9 +227,10 @@ HackathonApp.controller('HackathonController', ['$scope','$window','RequestServi
         }
     };
 
-    $scope.profileClick = function(){
+
+    $scope.profileClick = function(e){
         $("#modal-2").click();
-        console.log("trigger");
+        console.log(e);
     }
 
     $scope.addHobbies = function(){

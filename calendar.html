@@ -25,15 +25,11 @@
                         <div class="modal-close" for="modal-1"></div>
                         <div class="modal-title">
                             <h4>
-                                Event Name
+                                {{ event.title }}
                                 <h4>
                                     <span class="attendies-header">Tags:</span>
                                     <div class="tags">
-                                        <h4> Public</h4>
-                                        <h4> Public</h4>
-                                        <h4> Public</h4>
-                                        <h4> Public</h4>
-                                        <h4> Public</h4>
+                                        <h4 ng-repeat="tag in event.tags">{{ tag }}</h4>
                                     </div>
                         </div>
                         <div class="side-image">
@@ -41,14 +37,14 @@
                             <div class="side-image-content">
                                 <div class="stats">
                                     <ul>
-                                        <li>10:00 PM<span>Start</span></li>
-                                        <li>12:00 AM<span>End</span></li>
-                                        <li>Alliance Hub<span>Location</span></li>
+                                        <li>{{ event.start }}<span>Start</span></li>
+                                        <li>{{ event.end }}<span>End</span></li>
+                                        <li>{{ event.location }}<span>Location</span></li>
                                     </ul>
                                 </div>
                                 <div class="header-details">
-                                    <span class="header-name">Xavier Gayanilo</span>
-                                    <h3 class="attendies-header"> @gayaniloxavier@csyoutsourcing.com </h3>
+                                    <span class="header-name">{{ organizer.name }}</span>
+                                    <h3 class="attendies-header"> {{ organizer.email }} </h3>
                                 </div>
                                 <div class="header-buttons">
                                     <button id="modal-going-btn">Going</button>
@@ -57,39 +53,15 @@
                                 <br><br><br>
                                 <span class="attendies-header desciption"> Description: </span>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel magni, exercitationem architecto praesentium. Et aliquam, saepe ab ad doloremque repellat. Amet vero, iste fugiat molestiae quibusdam praesentium quos laudantium repellendus.
+                                    {{ event.description }}
                                 </p>
                                 <h3 class="attendies-header"> Attendees: </h3>
 
                                 <div class="attendies-body">
                                     <ul class="attendies-list">
-                                        <li>
+                                        <li ng-repeat="attendee in event.participants">
                                             <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
-                                        </li>
-                                        <li>
-                                            <span><img class="profile-pic" src="img/mini-profile2.jpg" alt=""></span>
-                                            <span class="name">Xavier Gayanilo</span>
+                                            <span class="name">{{ attendee.name }}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -135,6 +107,18 @@
         <script type="text/javascript" src="js/gcal.min.js"></script>
         <script type="text/javascript" src="ng/app.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
+<<<<<<< HEAD
         <script type="text/javascript" src="js/angular-local-storage.min.js"></script>
+=======
+        <!--<script>
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('sw.js').then(function(registration) {
+                console.log('Service Worker registered');
+              }).catch(function(err) {
+                console.log('Service Worker registration failed: ', err);
+              });
+            }
+        </script>-->
+>>>>>>> 72b1bef2e039d5ef9f6e1d881988e4c08774200c
     </body>
 </html>
