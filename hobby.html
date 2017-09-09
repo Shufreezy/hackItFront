@@ -12,70 +12,42 @@
     <body ng-app="HackathonApp" ng-controller="HackathonController">
         <div class="container">
         <div class="header">
-            <span class="logo">Logo</span>
-            <span class="links"><a href="">Calendar</a></span>
+            <span class="logo">Hobbies</span>
+            <span class="links"><a href="calendar.html">Calendar</a></span>
             <span class="links"><a href="" ng-click="profileClick()">Profile</a></span>
         </div>
         <div class="body">
-            <h3 class="li-header"> Events: </h3>
-            <ul class="li-list">
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-                <li>
-                    <span class="name">Xavier Gayanilo</span>
-                </li>
-            </ul>
+            <span class="event-tbl-header"> Events: </span>  <button class="add" ng-click="addEvents()"> + </button>
+            <table class="tables">
+              <thead>
+                <tr>
+                  <th>Events Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Row 1 Cell 1</td>
+                  <td>Row 1 Cell 2</td>
+                  <td><button>Update</button></td>
+                </tr>
+              </tbody>
+            </table>
             <div class=" li-hobbies">
-                <h3 class="li-header"> Hobbies: </h3>
-                <ul class="li-list li-hobbies">
+                <h3 class="li-header"> Hobbies: </h3> 
+                <ul class="li-list li-hobbies"> 
                     <li>
                         <span class="name tags"><h4> Public </h4> <button class="remove"> - </button></span>
                     </li>
                     <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
-                    </li>
-                    <li>
-                        <span class="name tags"><h4> Public </h4></span>
+                        <span class="name tags"><h4> Public </h4> <button class="remove"> - </button></span>
+                    </li>                    <li>
+                        <span class="name tags"><h4> Public </h4> <button class="remove"> - </button></span>
+                    </li>                    <li>
+                        <span class="name tags"><h4> Public </h4> <button class="remove"> - </button></span>
+                    </li>                    <li>
+                        <span class="name tags"><h4> Public </h4> <button class="remove"> - </button></span>
                     </li>
                 </ul>
             </div>
@@ -104,12 +76,53 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal calendar" >
+                <input class="modal-state" id="modal-3" type="checkbox" />
+                    <div class="modal-fade-screen" id="modal-profile">
+                        <div class="modal-inner">
+                            <div class="modal-close" for="modal-1"></div>
+                            <h1>Add Hobby</h1>
+                            Hobby Name:
+                            <input type="text" ng-model="hobby">
+                            <button ng-click="createHobbies()">Add Hobby</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal calendar" >
+                <input class="modal-state" id="modal-4" type="checkbox" />
+                    <div class="modal-fade-screen" id="modal-profile">
+                        <div class="modal-inner">
+                            <div class="modal-close" for="modal-1"></div>
+                            <h1>Add Event</h1>
+                            Event Name:
+                            <input type="text" ng-model="createEventName">
+                            Start Date:
+                            <input type="date" ng-model="createEventStart" name="dateofbirth" id="dateofbirth">
+                            End Date:
+                            <input type="date" ng-model="createEventEndDate" name="dateofbirth" id="dateofbirth">
+                            Poster:
+                            <input type="file" ng-model="createFile">
+                            Location:
+                            <input type="text" ng-model="createEventLocation">
+                            Description
+                            <input type="text" ng-model="createEventDescription">
+                            Private:<br>
+                            <label class="label-switch">
+                              <input ng-model="createEventPrivate" type="checkbox" />
+                              <div class="checkbox"></div>
+                            </label><br>
+                            <button ng-click="createEvents()">Add Event</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-local-storage.min.js"></script>
         <script type="text/javascript" src="js/calendar.js"></script>
         <script type="text/javascript" src="js/fullcalendar.min.js"></script>
         <script type="text/javascript" src="js/gcal.min.js"></script>

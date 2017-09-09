@@ -1,28 +1,19 @@
-var HackathonApp = angular.module('HackathonApp', ['ui.calendar']);
+var HackathonApp = angular.module('HackathonApp', ['ui.calendar','LocalStorageModule']);
 
 HackathonApp.factory('RequestService', ['$http', function($http) {
 
         function post(url, data, onSuccess, onError) {
-             $http({
-                    method: 'GET',
-                    url: host + "api/token",
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded' }
-                    }).then(function successCallback(response) {
                                 $http({
                                     method: 'POST',
                                     url: url,
-                                    data: $.param(data),
-                                    headers: {
-                                        'Content-Type':'application/x-www-form-urlencoded' }})
+                                    data: data
+                                })
                                         .then(function successCallback(response) {
                                             onSuccess(response);
                                         }, function errorCallback(response) {
                                             onError(response);
                                         });
-                                }, function errorCallback(response) {
-                                    console.log("ERROR",response)
-                            });
+
 
                 // console.log('SERVICE WORKING');
         }
@@ -30,7 +21,6 @@ HackathonApp.factory('RequestService', ['$http', function($http) {
         function get(url, onSuccess, onError) {
                 $http({
                     method: 'GET',
-                     url: url,
                      headers: {
                          'Accept': "application/json"
                      }})
@@ -48,14 +38,100 @@ HackathonApp.factory('RequestService', ['$http', function($http) {
 
 }]);
 
+HackathonApp.factory('AuthenticationService', ['localStorageService', '$window', '$location', function(localStorageService, $window, $location) {
+
+    function login(data){
+
+        localStorageService.set('token', data);
+        $window.location.href = '/calendar';
+    
+    }
+
+    function logout(){
+
+        localStorageService.remove('token');
+        $window.location.href = '/login'; 
+
+    }
+
+    function checkIfLoggedIn() {
+
+        if(localStorageService.get('token'))
+            return true;
+        else
+            return false;
+
+    }
+
+    function loggedIn(){
+
+        var loggedInFlag = checkIfLoggedIn();
+        var hostName = 'http://localhost:8000';
+        
+        if(loggedInFlag && angular.equals($location.absUrl(), hostName + '/login') || loggedInFlag && angular.equals($location.absUrl(), hostName + '/register')){
+            $window.location.href = '/'; 
+        } else if(!loggedInFlag && !angular.equals($location.absUrl(), hostName + '/login')){
+            if(!angular.equals($location.absUrl(), hostName + '/register'))
+                $window.location.href = '/login';
+        }
+
+    }
+
+    function getTokenData(){
+
+        return localStorageService.get('token');
+
+    }
+
+    function isAdmin(){
+
+        var data = getTokenData();
+
+        return data.adminFlag;
+
+    }
+
+    function hasAdminPrivilege(isAdmin){
+
+        if(isAdmin){
+            $window.location.href = '/';            
+            console.log('ye')
+        }
+
+    }
+
+    return {
+        checkIfLoggedIn: checkIfLoggedIn,
+        login:login,
+        logout:logout,
+        getTokenData:getTokenData,
+        loggedIn:loggedIn,
+        isAdmin:isAdmin,
+        hasAdminPrivilege:hasAdminPrivilege
+    }
+
+}]);
+
+
 HackathonApp.constant('API', {});
 
-HackathonApp.controller('HackathonController', ['$scope','RequestService', 'API', function ($scope, RequestService, API) {
+HackathonApp.controller('HackathonController', ['$scope','$window','RequestService', 'API', 'AuthenticationService', function ($scope, $window, RequestService, API, AuthenticationService) {
    
     $scope.alertEventOnClick = function(e){
         $("#modal-1").click();
         console.log("triggered");
     }
+
+    $scope.login = function(){
+           console.log("triggered");
+
+        AuthenticationService.login($scope.username+$scope.password);
+    }
+
+    if(AuthenticationService.checkIfLoggedIn() && $window.location.href != "https://localhost:8090/login" ){
+        console.log("success");
+    }else
+        $window.location.href = '/login';
 
     $scope.uiConfig = {
         calendar: {
@@ -114,6 +190,38 @@ HackathonApp.controller('HackathonController', ['$scope','RequestService', 'API'
         console.log("trigger");
     }
 
+    $scope.addHobbies = function(){
+        $("#modal-3").click();
+        console.log("trigger");
+    }
 
-    console.log("Controller running...")
+    $scope.createHobbies = function(){
+        // $("#modal-3").click();
+        console.log("trigger");
+    }
+
+    $scope.addEvents = function(){
+        $("#modal-4").click();
+        console.log("trigger");
+    }
+
+    $scope.createEvents = function(){
+        console.log()
+        RequestService.post("http://10.0.0.104:8090/create-event",
+        {
+            date_start : $scope.createEventStart,
+               date_end  : $scope.createEventEndDate,
+               name: $scope.createEventName,
+               description : $scope.createEventDescription,
+               pic  : "",
+               fee : 0, 
+               privacy : $scope.createEventPrivate,
+               organization : 1,
+               Location : $scope.createEventLocation,
+               id : 0
+        },
+        function(){alert("success")},
+        function(){alert("failed")})
+    }
+
 }]);
